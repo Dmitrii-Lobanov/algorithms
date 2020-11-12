@@ -33,19 +33,21 @@ function LinkedList() {
   };
   
   this.remove = function(element) {
-    let currentNode = head;
-    let previousNode;
-    
-    if(currentNode.element === element) {
-      head = currentNode.next;
-    } else {
-      while(currentNode.element !== element) {
-        previousNode = currentNode;
-        currentNode = currentNode.next;
-      }
-      previousNode.next = currentNode.next;
+    if (head.element === element) {
+      head = head.next;
+      return length--;
     }
-    length--;
+    let previousNode = head;
+    while (previousNode) {
+      let currentNode = previousNode.next;
+      if (currentNode) { // makes sure we are not at end where currentNode.next would be null
+        if (currentNode.element === element) {
+          previousNode.next = currentNode.next;
+          return length--;
+        }
+      }
+      previousNode = currentNode;
+    }
   };
   
   this.isEmpty = function() {
@@ -111,6 +113,12 @@ function LinkedList() {
     if(index < 0 || index >= length) {
       return null;
     } else {
+      if(index === 0) {
+        head = null;
+        length--;
+        return currentNode.element;
+      }
+      
       while(currentIndex < index) {
         currentIndex++;
         previousNode = currentNode;
