@@ -19,4 +19,22 @@ function binarySearch(arr, target) {
   return false;
 }
 
+// A recursive implementation
+function binarySearch(arr, target) {
+  return binarySearchFunc(arr, target, 0, arr.length - 1);
+}
+
+function binarySearchFunc(arr, target, left, right) {
+  if(left > right) return false;
+  
+  let mid = Math.floor((left + right) / 2);
+  if(target === arr[mid]) {
+    return mid;
+  } else if (target < arr[mid]) {
+    return binarySearchFunc(arr, target, left, mid - 1);
+  } else {
+    return binarySearchFunc(arr, target, mid + 1, right);
+  }
+}
+
 binarySearch(arr, 41);
