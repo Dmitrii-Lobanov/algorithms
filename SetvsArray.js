@@ -1,13 +1,8 @@
 // Comparing real time executing operations with Set and array
 
-const arr = [];
-const set = new Set();
 const n = 1e6;
-
-for (let i = 0; i < n; i++) {
-  arr.push(i);
-  set.add(i);
-}
+const arr = new Array(n).fill(undefined).map((el, i) => i + 1);
+const set = new Set(arr);
 
 let result;
 
