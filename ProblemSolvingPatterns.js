@@ -60,3 +60,32 @@ const sumZero = (arr: number[]): number[] => {
 }
 
 sumZero([-4,-3,-2,-1,0, 1,2,5]);
+
+// SLIDING WINDOW
+
+/* Write a function which accepts an array of integers and a number (n). 
+The function should calculate the maximum sum of n consecutive elements in the array  */
+
+const maxSubarraySum = (arr, n) => {
+  if(n > arr.length) return null;
+  
+  let max = 0;
+  let temp = 0;
+  
+  for(let i = 0; i < n; i++) {
+    max += arr[i];
+  }
+  
+  temp = max;
+  
+  for(let i = n; i < arr.length; i++) {
+    // Subtract the first element and add the new last element
+    temp = temp - arr[i - n] + arr[i];
+    max = Math.max(max, temp);
+  }
+  
+  return max;
+}
+
+maxSubarraySum([2,6,9,2,1,8,5,6,3],3)
+maxSubarraySum([2,6],3)
