@@ -25,7 +25,9 @@ function selectionSort(arr) {
         min = j;
       }
     }
-    swap(arr, min, i);
+    if(i !== min) {
+      swap(arr, min, i);
+    }
   }
   
   return arr;
