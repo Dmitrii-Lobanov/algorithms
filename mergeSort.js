@@ -1,43 +1,54 @@
-const arr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
+/*
+  MERGING ARRAYS PSEUDOCODE
+  - Create an empty array, take a look at the smallest values in each input array
+  - While there are still values we have not looked at:
+	- If the value in the first array is smaller than value in the second array, push the value in the first array into our results and move on to the next value in the first array
+	- If the value in the first array is larger than the value in the second array, push the value in the second array into our results and move on to the next value in the second array
+	- Once we exhaust one array, push in all remaining values from the other array
+*/
 
-// Merge the two arrays: left and right
-function merge (left, right) {
-  let result = [], leftIndex = 0, rightIndex = 0;
-
-  // We will concatenate values into the result in order
-  while (leftIndex < left.length && rightIndex < right.length) {
-    if (left[leftIndex] < right[rightIndex]) {
-      result.push(left[leftIndex]);
-      leftIndex++; // move left array cursor
+function merge(arr1, arr2) {
+  let result = [];
+  let i = 0;
+  let j = 0;
+  
+  while(i < arr1.length && j < arr2.length) {
+    if(arr2[j] > arr1[i]) {
+      result.push(arr1[i]);
+      i++;
     } else {
-      result.push(right[rightIndex]);
-      rightIndex++; // move right array cursor
+      result.push(arr2[j]);
+      j++;
     }
   }
-
-  // We need to concat here because there will be one element remaining
-  // from either left OR the right
-  return result
-          .concat(left.slice(leftIndex))
-          .concat(right.slice(rightIndex));
-}
-
-// Merge Sort Implentation (Recursion)
-function mergeSort (arr) {
-  // No need to sort the array if the array only has one element or empty
-  if (arr.length < 2) {
-    return arr;
+  
+  while(i < arr1.length) {
+    result.push(arr1[i]);
+    i++;
+  }
+  while(j < arr2.length) {
+    result.push(arr2[j]);
+    j++;
   }
   
-  // In order to divide the array in half, we need to figure out the middle
-  const middle = Math.floor(arr.length / 2);
-
-  // This is where we will be dividing the array into left and right
-  const left = arr.slice(0, middle);
-  const right = arr.slice(middle);
-
-  // Using recursion to combine the left and right
-  return merge(mergeSort(left), mergeSort(right));
+  return result;
 }
 
-mergeSort(arr);
+/*
+  MERGING SORT PSEUDOCODE
+- Break up the array into halves until you have arrays that are empty or have one element
+- Once you have smaller sorted arrays, merge those arrays with other sorted arrays until you are back at the full length of the array
+- Once the array has been merged back together, return the merged and sorted array
+*/
+
+function mergeSort(arr) {
+  if(arr.length <= 1) return arr;
+  
+  let mid = Math.floor(arr.length/2);
+  let left = mergeSort(arr.slice(0, mid));
+  let right = mergeSort(arr.slice(mid));
+  
+  return merge(left, right);
+}
+
+mergeSort([6,12,3,78,12,1])
