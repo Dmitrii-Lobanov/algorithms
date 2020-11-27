@@ -5,7 +5,7 @@
 */
 
 /* PSEUDOCODE
-  - Start looping with a variable called i from the begi of the array towards the beginning
+  - Start looping with a variable called i from the end of the array towards the beginning
   - Start an inner loop with a variable called j from the beginning until i - 1
   - If arr[j] is greate than arr[j+1], swap those two values
   - Return the sorted array
