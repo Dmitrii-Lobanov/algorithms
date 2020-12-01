@@ -87,7 +87,72 @@ class DoublyLinkedList {
     }
     return arr;
   }
-}
+  
+  get(index) {
+    if(index < 0 || index >= this.length) return null;
+    let count, current;
+    
+    if(index <= this.length / 2) {
+      count = 0;
+      current = this.head;
+      while(count !== index) {
+        count++;
+        current = current.next;
+      }
+    } else {
+      count = this.length - 1;
+      current = this.tail;
+      while(count !== index) {
+        count--;
+        current = current.previous;
+      }
+    }
+    return current;
+  }
+  
+  set(index, value) {
+    let node = this.get(index);
+    if(node !== null) {
+      node.value = value;
+      return true;
+    }
+    return false;
+  }
+  
+  insert(index, value) {
+    if(index < 0 || index > this.length) return false;
+    if(index === 0) return !!this.unshift(value);
+    if(index === this.length) return !!this.push(value);
+    let node = new Node(value);
+    const previous = this.get(index - 1);
+    const next = previous.next;
+    previous.next.previous = node;
+    previous.next = node;
+    node.next = next;
+    this.length++;
+    return true;
+  }
+  
+  remove(index) {
+    if(index < 0 || index >= this.length) return undefined;
+    if(index === 0) return this.shift();
+    if(index === this.length - 1) return this.pop();
+    const removed = this.get(index);
+    removed.previous.next = removed.next;
+    removed.next.previous = removed.previous;
+    removed.next = null;
+    removed.previous = null;
+    this.length--;
+  }
 }
 
-const dll = new DoublyLinkedList(13);
+const dll = new DoublyLinkedList();
+dll.push(1);
+dll.push(2);
+dll.push(3);
+dll.push(4);
+dll.print();
+dll.set(11, 'rrrr')
+dll.insert(4, 'ins')
+dll.remove(1)
+dll.print()
