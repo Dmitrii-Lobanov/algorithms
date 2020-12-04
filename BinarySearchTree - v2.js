@@ -55,6 +55,21 @@ class BinarySearchTree {
     if(!found) return 'Not found';
     return current;
   }
+  
+  // Breadth-first search
+  BFS() {
+    let queue = [];
+    let values = [];
+    let node = this.root;
+    queue.push(node);
+    while(queue.length) {
+      node = queue.shift();
+      values.push(node.value);
+      if(node.left) queue.push(node.left);
+      if(node.right) queue.push(node.right);
+    }
+    return values;
+  }
 }
 
 const tree = new BinarySearchTree();
