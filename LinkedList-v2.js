@@ -109,8 +109,8 @@ class LinkedList {
   remove(index) {
     if(index < 0 || index >= this.length) return null;
     
-    if(index === this.length) return this.pop(index);
-    if(index === 0) return this.shift(index);
+    if(index === this.length) return this.pop();
+    if(index === 0) return this.shift();
     
     let previous = this.get(index - 1);
     let removed = previous.next;
