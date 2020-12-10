@@ -33,17 +33,41 @@ class Graph {
     }
     delete this.adjacencyList[vertex];
   }
+  
+  DFSRecursive(start) {
+    const results = [];
+    const visited = {};
+    const adjacencyList = this.adjacencyList;
+    
+    (function traverse(vertex) {
+      if(!vertex) return null;
+      
+      visited[vertex] = true;
+      results.push(vertex);
+      
+      adjacencyList[vertex].forEach(neighbor => {
+        if(!visited[neighbor]) {
+          return traverse(neighbor);
+        }
+      })
+    })(start);
+    
+    return results;
+  }
 }
 
 const graph = new Graph();
-graph.addVertex('first');
-graph.addVertex('second');
-graph.addVertex('third');
+graph.addVertex('A');
+graph.addVertex('B');
+graph.addVertex('C');
+graph.addVertex('D');
+graph.addVertex('E');
+graph.addVertex('F');
 
-graph.addEdge('first', 'third');
-graph.addEdge('first', 'second');
-graph.addEdge('first', 'second');
-
-graph.removeVertex('first')
-
-graph.adjacencyList
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('B', 'D');
+graph.addEdge('C', 'E');
+graph.addEdge('D', 'E');
+graph.addEdge('D', 'F');
+graph.addEdge('E', 'F');
