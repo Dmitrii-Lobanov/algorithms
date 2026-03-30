@@ -2,14 +2,14 @@
 
 // Create function same which check if the second array contains all the values of the first array squared
 
-function same(arr1, arr2) {
+function same(arr1: number[], arr2: number[]) {
   if (arr1.length !== arr2.length) {
     return false;
   }
   
   // Create objects for each array which contain value as key and frequency count as value
-  let frequencyCounter1 = {};
-  let frequencyCounter2 = {};
+  let frequencyCounter1: Record<number, number> = {};
+  let frequencyCounter2: Record<number, number> = {};
 
   // Fill objects with keys/values
   for (let val of arr1) {
@@ -23,11 +23,11 @@ function same(arr1, arr2) {
   // Iterate over keys in object
   for (let key in frequencyCounter1) {
     // False if there is no match key in the seccond object
-    if (!(key ** 2 in frequencyCounter2)) {
+    if (!(( Number(key) ** 2) in frequencyCounter2)) {
       return false;
     }
     // False if values of the certain key do not match, i.e. frequency count is different
-    if (frequencyCounter2[key ** 2] !== frequencyCounter1[key]) {
+    if (frequencyCounter2[Number(key) ** 2] !== frequencyCounter1[key]) {
       return false;
     }
   }
@@ -44,9 +44,10 @@ The function should find the first pair where the sum is 0.
 Return an array that includes both values that sum to zero or undefined 
 if a pair does not exist */
 
-const sumZero = (arr: number[]): number[] => {
+const sumZero = (arr: number[]): number[] | undefined => {
   let left = 0;
   let right = arr.length - 1;
+
   while(left < right) {
     let sum = arr[left] + arr[right];
     if(sum === 0) {
@@ -66,7 +67,7 @@ sumZero([-4,-3,-2,-1,0, 1,2,5]);
 /* Write a function which accepts an array of integers and a number (n). 
 The function should calculate the maximum sum of n consecutive elements in the array  */
 
-const maxSubarraySum = (arr, n) => {
+const maxSubarraySum = (arr: number[], n: number) => {
   if(n > arr.length) return null;
   
   let max = 0;

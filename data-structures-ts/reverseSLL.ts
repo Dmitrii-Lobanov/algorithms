@@ -1,4 +1,4 @@
-import { list, SinglyLinkedList, SingleNode } from "./singlyLinkedList";
+import { list, SinglyLinkedList, SingleNode } from "../singlyLinkedList";
 
 type ReverseSLL = <T>(list: SinglyLinkedList<T>) => SinglyLinkedList<T>;
 
