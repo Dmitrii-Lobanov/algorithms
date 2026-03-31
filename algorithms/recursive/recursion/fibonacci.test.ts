@@ -1,6 +1,6 @@
 // fibonacci.test.ts
 import { describe, it, expect } from "vitest";
-import { fibonacci, fibonacciMemoized } from "./recursion";
+import { fibonacci, fibonacciMemoized } from "./fibonacci";
 
 describe("fibonacci", () => {
   it("should return correct values for small numbers", () => {
