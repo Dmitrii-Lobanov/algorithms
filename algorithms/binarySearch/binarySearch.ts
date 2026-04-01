@@ -1,14 +1,12 @@
-const arr = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
-
-
 // An iterative implementation
-function binarySearch(arr, target) {
+export function binarySearch(arr: number[], target: number) {
   let left = 0;
   let right = arr.length - 1;
-  
-  while(left <= right) {
+
+  while (left <= right) {
     let mid = Math.floor((left + right) / 2);
-    if(target === arr[mid]) {
+
+    if (target === arr[mid]) {
       return mid;
     } else if (target < arr[mid]) {
       right = mid - 1;
@@ -20,15 +18,21 @@ function binarySearch(arr, target) {
 }
 
 // A recursive implementation
-function binarySearch(arr, target) {
+export function binarySearch2(arr: number[], target: number) {
   return binarySearchFunc(arr, target, 0, arr.length - 1);
 }
 
-function binarySearchFunc(arr, target, left, right) {
-  if(left > right) return -1;
-  
+function binarySearchFunc(
+  arr: number[],
+  target: number,
+  left: number,
+  right: number,
+) {
+  if (left > right) return -1;
+
   let mid = Math.floor((left + right) / 2);
-  if(target === arr[mid]) {
+
+  if (target === arr[mid]) {
     return mid;
   } else if (target < arr[mid]) {
     return binarySearchFunc(arr, target, left, mid - 1);
@@ -36,5 +40,3 @@ function binarySearchFunc(arr, target, left, right) {
     return binarySearchFunc(arr, target, mid + 1, right);
   }
 }
-
-binarySearch(arr, 41);
