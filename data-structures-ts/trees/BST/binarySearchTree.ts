@@ -203,4 +203,26 @@ export class BSTClass<T> implements BST<T> {
 
     return values;
   }
+
+  public heightBFS(): number {
+    if (!this.root) return 0;
+
+    const queue: BSTNode<T>[] = [this.root];
+    let height = 0;
+
+    while (queue.length) {
+      const levelSize = queue.length;
+
+      for (let i = 0; i < levelSize; i++) {
+        const node = queue.shift()!;
+
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+      }
+
+      height++; // finished one level
+    }
+
+    return height;
+  }
 }

@@ -96,3 +96,78 @@ describe("BSTClass", () => {
     expect(newTree.BFS()).toEqual([1, 2, 3]);
   });
 });
+
+describe("BST heightBFS", () => {
+  it("should return 0 for an empty tree", () => {
+    const bst = new BSTClass<number>();
+    expect(bst.heightBFS()).toBe(0);
+  });
+
+  it("should return 1 for a single node tree", () => {
+    const bst = new BSTClass<number>();
+    bst.insert(10);
+
+    expect(bst.heightBFS()).toBe(1);
+  });
+
+  it("should return correct height for a balanced tree", () => {
+    const bst = new BSTClass<number>();
+
+    //      10
+    //     /  \
+    //    5   15
+    //   / \
+    //  3   7
+
+    [10, 5, 15, 3, 7].forEach((v) => bst.insert(v));
+
+    expect(bst.heightBFS()).toBe(3);
+  });
+
+  it("should return correct height for a right-skewed tree", () => {
+    const bst = new BSTClass<number>();
+
+    // 10 -> 20 -> 30 -> 40
+
+    [10, 20, 30, 40].forEach((v) => bst.insert(v));
+
+    expect(bst.heightBFS()).toBe(4);
+  });
+
+  it("should return correct height for a left-skewed tree", () => {
+    const bst = new BSTClass<number>();
+
+    // 40 -> 30 -> 20 -> 10
+
+    [40, 30, 20, 10].forEach((v) => bst.insert(v));
+
+    expect(bst.heightBFS()).toBe(4);
+  });
+
+  it("should not increase height when inserting duplicate values", () => {
+    const bst = new BSTClass<number>();
+
+    bst.insert(10);
+    bst.insert(10); // ignored
+
+    expect(bst.heightBFS()).toBe(1);
+  });
+
+  it("should update height after deletions", () => {
+    const bst = new BSTClass<number>();
+
+    [10, 5, 15, 3, 7].forEach((v) => bst.insert(v));
+
+    expect(bst.heightBFS()).toBe(3);
+
+    bst.delete(3);
+    bst.delete(7);
+
+    // Now:
+    //    10
+    //   /  \
+    //  5   15
+
+    expect(bst.heightBFS()).toBe(2);
+  });
+});
