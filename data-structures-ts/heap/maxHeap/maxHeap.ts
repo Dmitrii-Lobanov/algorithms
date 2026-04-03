@@ -89,6 +89,8 @@ export class MaxHeap {
   public buildHeap(arr: number[]): void {
     this.heap = [...arr];
 
+    // Start from the last non-leaf node and heapify down
+    // The last non-leaf node is at index floor(n/2) - 1
     for (let i = Math.floor(this.heap.length / 2) - 1; i >= 0; i--) {
       this.heapifyDown(i);
     }
